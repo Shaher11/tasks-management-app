@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CardList extends Model
 {
+    protected $fillable = [ 'title', 'board_id' ];
+
     use HasFactory;
     
     public function cards(): HasMany
