@@ -2,13 +2,10 @@
 
     <div class="list bg-gray-200 rounded-sm p-2 mr-2">
         <div class="flex justify-between">
-            <div class="text-gray-700 pl-2 pb-2 font-bold">list title</div>
+            <div class="text-gray-700 pl-2 pb-2 font-bold">{{list.title}}</div>
         </div>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
+        <app-card :card="card" v-for="card in list.cards" :key="card.id"></app-card>
+  
         <app-add-card-bottom></app-add-card-bottom>
 
     </div>
@@ -24,6 +21,10 @@
         components: {
             appCard: Card,
             appAddCardBottom: AddCardBottom
+        },
+
+        props:{
+            list: Object
         }
     }
 

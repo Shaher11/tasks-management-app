@@ -6,28 +6,53 @@
             <div class="mr-2 w-1/3 flex justify-end">R</div>
         </div>
 
-    <div class="h-full flex flex-1 flex-col items-stretch">
-        <div class="mx-4 mb-2 text-white font-bold text-lg">The board title goes here</div>
-        <div class="flex flex-1 items-start overflow-x-auto mx-2">
-            <app-list></app-list>
-            <app-list></app-list>
-            <app-list></app-list>
+        <div class="h-full flex flex-1 flex-col items-stretch">
+            <div class="mx-4 mb-2 text-white font-bold text-lg">
+                <span v-if="$apollo.queries.board.loading"> Loading...</span>
+                <span v-else>{{ board.title }}</span>
+            </div>
+            <div class="flex flex-1 items-start overflow-x-auto mx-2" v-if="board">
+                <app-list :list="list" v-for="list in board.lists" :key="list.id"></app-list>
 
+            </div>
         </div>
-    </div>
-
     </div>
 </template>
 <script>
+import gql from 'graphql-tag';
 import List from './components/List'
-
 
 export default {
     components: {
         appList: List,
-        
+    },
+
+    apollo:{
+        board: {
+            query: gql`
+             query($id: ID!){
+                    board(id: $id){
+                        title
+                        color
+                        lists {
+                        id
+                        title
+                            cards{
+                                id
+                                title
+                                order
+                            }
+                        }
+                    }
+                }   
+            `,
+            variables:{
+                id: 1
+            }
+        }
     }
-}
+
+};
 
 </script>
 
