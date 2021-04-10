@@ -14,7 +14,28 @@ const mix = require("laravel-mix");
 // webpack.mix.js
 mix.postCss("resources/css/app.css", "public/css", [require("tailwindcss")]);
 
+mix.extend(
+    "graphql",
+    new class {
+     
+        dependencies() {
+            return ['graphql', 'graphql-tag']
+        }
+
+        webpackRules() {
+            return {
+                test: /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                loader: 'graphql-tag/loader'
+            }
+        }
+
+    }()
+);
+
 mix.js("resources/js/app.js", "public/js").vue();
+
+mix.graphql();
 
 if (mix.inProduction()) {
     mix.version();
