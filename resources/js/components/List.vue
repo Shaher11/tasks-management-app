@@ -6,7 +6,8 @@
         </div>
         <app-card :card="card" v-for="card in list.cards" :key="card.id"></app-card>
   
-        <app-add-card-bottom></app-add-card-bottom>
+        <app-card-editor v-if="editing" @closed="editing=false"></app-card-editor>
+        <app-add-card-bottom v-else @click="editing=true"></app-add-card-bottom>
 
     </div>
 
@@ -16,15 +17,22 @@
 
     import Card from './Card'
     import AddCardBottom from './AddCardBottom'
+    import CardEditor from './CardEditor'
 
     export default {
         components: {
             appCard: Card,
-            appAddCardBottom: AddCardBottom
+            appAddCardBottom: AddCardBottom,
+            appCardEditor: CardEditor
         },
 
         props:{
             list: Object
+        },
+        data(){
+            return {
+                editing: false
+            }
         }
     }
 
