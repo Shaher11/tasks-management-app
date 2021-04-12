@@ -7628,6 +7628,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     card: Object
@@ -33794,12 +33800,34 @@ var render = function() {
     "div",
     {
       staticClass:
-        "shadow-card bg-white rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2"
+        "group flex justify-between shadow-card bg-white rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2"
     },
-    [_vm._v(_vm._s(_vm.card.title))]
+    [_c("div", [_vm._v(_vm._s(_vm.card.title))]), _vm._v(" "), _vm._m(0)]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500"
+      },
+      [
+        _c("div", { staticClass: "text-gray-400 pr-2 hover:text-yellow-500" }, [
+          _vm._v("E")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-gray-400 hover:text-red-500" }, [
+          _vm._v("D")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
