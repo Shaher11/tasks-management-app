@@ -6,7 +6,7 @@
         </div>
         <app-card :card="card" v-for="card in list.cards" :key="card.id"></app-card>
   
-        <app-card-editor v-if="editing" @closed="editing=false" :list="list"></app-card-editor>
+        <app-card-editor v-if="editing" @closed="editing=false" :list="list" @added="$emit('card-added', {...$event, listId: list.id})"></app-card-editor>
         <app-add-card-bottom v-else @click="editing=true"></app-add-card-bottom>
 
     </div>
