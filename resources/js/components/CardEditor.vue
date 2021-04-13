@@ -12,7 +12,7 @@
 
         <div class="flex">
             <button @click="saved" class="rounded-sm py-1 px-3 bg-green-500 text-white cursor-pointer hover:bg-green-400 outline-none">
-                Add Card
+                {{ label }}
             </button>
             <button @click="closed" class="py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500">
                 Cancel
@@ -25,7 +25,7 @@
 <script>
 
 export default {
-    props:["value"],
+    props:["value", "label"],
 
     mounted(){
         this.$refs.card.focus();

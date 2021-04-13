@@ -18,16 +18,19 @@
                     :key="list.id"
                     @card-added="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
+                    @card-updated="updateQueryCache($event)"
                     ></app-list>
 
             </div>
         </div>
     </div>
 </template>
+
 <script>
-import List from './components/List'
-import { EVENT_CARD_ADDED, EVENT_CARD_DELETED } from './constants';
-import BoardQuery from './graphql/BoardWithListsAndCards.gql'
+
+import List from './components/List';
+import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from './constants';
+import BoardQuery from './graphql/BoardWithListsAndCards.gql';
 
 export default {
     components: {
@@ -37,7 +40,6 @@ export default {
     apollo:{
         board: {
             query: BoardQuery,
-
             variables:{
                 id: 1
             }
@@ -59,6 +61,11 @@ export default {
                     listById().cards.push(event.data);
                     break;
                 
+                case EVENT_CARD_UPDATED:    
+                    listById().cards.filter(card => card.id == event.data.id)
+                    .title = event.data.title;
+                    break;
+
                 case EVENT_CARD_DELETED:
                     listById().cards = listById().cards.filter(
                         card => card.id != event.data.id
@@ -66,11 +73,9 @@ export default {
                     break;
             }
 
-            
             event.store.writeQuery({ query: BoardQuery, data});
         }
     }
-
 };
 
 </script>
