@@ -12,29 +12,30 @@
             @deleted="$emit('card-deleted', { ...$event, listId: list.id })"
         ></app-card>
 
-        <app-card-editor
+        <app-card-add-editor
             v-if="editing"
             @closed="editing = false"
             :list="list"
             @added="$emit('card-added', { ...$event, listId: list.id })"
-        ></app-card-editor>
+        ></app-card-add-editor>
+
         <app-add-card-bottom
             v-else
             @click="editing = true"
         ></app-add-card-bottom>
+        
     </div>
 </template>
 
 <script>
 import Card from "./Card";
 import AddCardBottom from "./AddCardBottom";
-import CardEditor from "./CardEditor";
-
+import CardAddEditor from "./CardAddEditor"
 export default {
     components: {
         appCard: Card,
         appAddCardBottom: AddCardBottom,
-        appCardEditor: CardEditor
+        appCardAddEditor: CardAddEditor
     },
 
     props: {

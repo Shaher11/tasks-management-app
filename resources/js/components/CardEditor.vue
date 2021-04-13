@@ -3,14 +3,15 @@
         <textarea
             class="shadow-card rounded-md py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none"
             placeholder="Enter a title for this card..."
-            v-model="title"
+            :value="value"
             ref="card"
             @keyup.esc="closed"
-            @keyup.enter="addCard">
+            @keyup.enter="saved"
+            @input="$emit('input', $event.target.value)">
         </textarea>
 
         <div class="flex">
-            <button @click="addCard" class="rounded-sm py-1 px-3 bg-green-500 text-white cursor-pointer hover:bg-green-400 outline-none">
+            <button @click="saved" class="rounded-sm py-1 px-3 bg-green-500 text-white cursor-pointer hover:bg-green-400 outline-none">
                 Add Card
             </button>
             <button @click="closed" class="py-1 px-3 ml-1 rounded-md hover:bg-gray-400 cursor-pointer text-gray-500">
@@ -22,42 +23,20 @@
     </div>
 </template>
 <script>
-import CardAdd from './../graphql/CardAdd.gql'
-import BoardQuery from './../graphql/BoardWithListsAndCards.gql'
-import { EVENT_CARD_ADDED } from '../constants'
 
 export default {
-    props:{
-        list: Object
-    },
-    data(){
-        return{
-            title: null
-        }
-    },
+    props:["value"],
+
     mounted(){
         this.$refs.card.focus();
     },
   
     methods: {
-       addCard(){
-           const self = this;
-
-           this.$apollo.mutate({
-               mutation: CardAdd,
-               variables: {
-                   title: this.title,
-                   listId: this.list.id,
-                   order:this.list.cards.length + 1
-               },
-               update(store, {data: {cardAdd} }) {
-                    self.$emit("added", { store, data: cardAdd, type: EVENT_CARD_ADDED });
-                    self.closed();
-               }
-           });
-       },
        closed(){
            this.$emit("closed");
+       },
+       saved(){
+           this.$emit("saved");
        }
    }
 }
