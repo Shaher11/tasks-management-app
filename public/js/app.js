@@ -7599,6 +7599,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7665,10 +7666,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cardDelete: function cardDelete() {
+      var self = this;
       this.$apollo.mutate({
         mutation: (_graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_0___default()),
         variables: {
           id: this.card.id
+        },
+        update: function update(store, _ref) {
+          var cardDelete = _ref.data.cardDelete;
+          self.$emit("deleted", {
+            store: store,
+            data: cardDelete
+          });
         }
       });
     }
@@ -7771,6 +7780,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Card */ "./resources/js/components/Card.vue");
 /* harmony import */ var _AddCardBottom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddCardBottom */ "./resources/js/components/AddCardBottom.vue");
 /* harmony import */ var _CardEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CardEditor */ "./resources/js/components/CardEditor.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7892,7 +7913,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\n    height: 40px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\r\n    height: 40px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7916,7 +7937,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list[data-v-1856aeee]{\r\n    width: 250px;\r\n    min-width: 250px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list[data-v-1856aeee] {\r\n    width: 250px;\r\n    min-width: 250px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33865,6 +33886,9 @@ var render = function() {
                   on: {
                     "card-added": function($event) {
                       return _vm.updateQueryCache($event)
+                    },
+                    "card-deleted": function($event) {
+                      return _vm.updateQueryCache($event)
                     }
                   }
                 })
@@ -34115,12 +34139,23 @@ var render = function() {
     [
       _c("div", { staticClass: "flex justify-between" }, [
         _c("div", { staticClass: "text-gray-700 pl-2 pb-2 font-bold" }, [
-          _vm._v(_vm._s(_vm.list.title))
+          _vm._v("\n            " + _vm._s(_vm.list.title) + "\n        ")
         ])
       ]),
       _vm._v(" "),
       _vm._l(_vm.list.cards, function(card) {
-        return _c("app-card", { key: card.id, attrs: { card: card } })
+        return _c("app-card", {
+          key: card.id,
+          attrs: { card: card },
+          on: {
+            deleted: function($event) {
+              return _vm.$emit(
+                "card-deleted",
+                Object.assign({}, $event, { listId: _vm.list.id })
+              )
+            }
+          }
+        })
       }),
       _vm._v(" "),
       _vm.editing

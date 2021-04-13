@@ -18,10 +18,15 @@ import CardDelete from "./../graphql/CardDelete.gql";
         },
         methods: {
             cardDelete () {
+                const self = this;
+                
                 this.$apollo.mutate({
                     mutation: CardDelete,
                     variables: {
                         id: this.card.id
+                    },
+                    update(store, {data: { cardDelete } }) {
+                        self.$emit("deleted", { store, data: cardDelete });
                     }
                 })
             }

@@ -17,6 +17,7 @@
                     v-for="list in board.lists" 
                     :key="list.id"
                     @card-added="updateQueryCache($event)"
+                    @card-deleted="updateQueryCache($event)"
                     ></app-list>
 
             </div>
