@@ -7572,8 +7572,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_List__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/List */ "./resources/js/components/List.vue");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
-/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./resources/js/constants.js");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
+/* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -7600,6 +7601,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7608,7 +7610,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   apollo: {
     board: {
-      query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default()),
+      query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default()),
       variables: {
         id: 1
       }
@@ -7617,16 +7619,32 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateQueryCache: function updateQueryCache(event) {
       var data = event.store.readQuery({
-        query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default()),
+        query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default()),
         variables: {
           id: Number(this.board.id)
         }
       });
-      data.board.lists.find(function (list) {
-        return list.id == event.listId;
-      }).cards.push(event.data);
+
+      var listById = function listById() {
+        return data.board.lists.find(function (list) {
+          return list.id == event.listId;
+        });
+      };
+
+      switch (event.type) {
+        case _constants__WEBPACK_IMPORTED_MODULE_1__.EVENT_CARD_ADDED:
+          listById().cards.push(event.data);
+          break;
+
+        case _constants__WEBPACK_IMPORTED_MODULE_1__.EVENT_CARD_DELETED:
+          listById().cards = listById().cards.filter(function (card) {
+            return card.id != event.data.id;
+          });
+          break;
+      }
+
       event.store.writeQuery({
-        query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default()),
+        query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default()),
         data: data
       });
     }
@@ -7648,6 +7666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../graphql/CardDelete.gql */ "./resources/js/graphql/CardDelete.gql");
 /* harmony import */ var _graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardDelete_gql__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../constants */ "./resources/js/constants.js");
 //
 //
 //
@@ -7659,6 +7678,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -7676,7 +7696,8 @@ __webpack_require__.r(__webpack_exports__);
           var cardDelete = _ref.data.cardDelete;
           self.$emit("deleted", {
             store: store,
-            data: cardDelete
+            data: cardDelete,
+            type: _constants__WEBPACK_IMPORTED_MODULE_1__.EVENT_CARD_DELETED
           });
         }
       });
@@ -7701,6 +7722,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
 //
 //
 //
@@ -7724,6 +7746,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7752,7 +7775,8 @@ __webpack_require__.r(__webpack_exports__);
           var cardAdd = _ref.data.cardAdd;
           self.$emit("added", {
             store: store,
-            data: cardAdd
+            data: cardAdd,
+            type: _constants__WEBPACK_IMPORTED_MODULE_2__.EVENT_CARD_ADDED
           });
           self.closed();
         }
@@ -7893,6 +7917,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 
 window._ = lodash__WEBPACK_IMPORTED_MODULE_0__;
+
+/***/ }),
+
+/***/ "./resources/js/constants.js":
+/*!***********************************!*\
+  !*** ./resources/js/constants.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EVENT_CARD_ADDED": () => (/* binding */ EVENT_CARD_ADDED),
+/* harmony export */   "EVENT_CARD_DELETED": () => (/* binding */ EVENT_CARD_DELETED)
+/* harmony export */ });
+var EVENT_CARD_ADDED = 'EVENT_CARD_ADDED';
+var EVENT_CARD_DELETED = 'EVENT_CARD_DELETED';
 
 /***/ }),
 
