@@ -2,7 +2,7 @@
   <div class="bg-white sm:bg-gray-100 h-full flex justify-center">
     <div class="container mt-2 sm:mt-10 flex flex-col items-center">
       <div class="text-3xl text-blue-700 font-bold mb-10">
-        <span>Laravello</span>
+        <span>Speedy</span>
       </div>
 
       <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
@@ -14,8 +14,8 @@
             <input
               type="text"
               class="rounded-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2 w-full text-sm"
-              placeholder="Enter email"
-              v-model="email"
+              placeholder="Enter full name"
+              v-model="name"
             />
           </div>
 
@@ -23,8 +23,8 @@
             <input
               type="text"
               class="rounded-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2 w-full text-sm"
-              placeholder="Enter full name"
-              v-model="name"
+              placeholder="Enter email"
+              v-model="email"
             />
           </div>
 

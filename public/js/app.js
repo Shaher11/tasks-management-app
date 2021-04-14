@@ -7955,8 +7955,12 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vue_apollo__WEBPACK_IMPORTED_MODULE_0__.default);
 var apolloClient = new apollo_boost__WEBPACK_IMPORTED_MODULE_2__.default({
-  url: 'http://localhost:8000/graphql' //End Point
-
+  url: 'http://localhost:8000/graphql',
+  //End Point
+  headers: {
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+  },
+  credentials: 'include'
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_apollo__WEBPACK_IMPORTED_MODULE_0__.default({
   defaultClient: apolloClient
@@ -34541,7 +34545,7 @@ var render = function() {
                 {
                   staticClass: "w-full text-center text-gray-600 font-bold mb-8"
                 },
-                [_vm._v("Log in to Laravello")]
+                [_vm._v("Log in to Speedy")]
               ),
               _vm._v(" "),
               _c(
@@ -34645,7 +34649,7 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "text-3xl text-blue-700 font-bold mb-10" },
-      [_c("span", [_vm._v("Laravello")])]
+      [_c("span", [_vm._v("Speedy")])]
     )
   },
   function() {
@@ -34728,31 +34732,6 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email"
-                        }
-                      ],
-                      staticClass:
-                        "rounded-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2 w-full text-sm",
-                      attrs: { type: "text", placeholder: "Enter email" },
-                      domProps: { value: _vm.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.email = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "w-full mb-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
                           value: _vm.name,
                           expression: "name"
                         }
@@ -34767,6 +34746,31 @@ var render = function() {
                             return
                           }
                           _vm.name = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-full mb-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.email,
+                          expression: "email"
+                        }
+                      ],
+                      staticClass:
+                        "rounded-sm px-4 py-2 outline-none focus:outline-none border-gray-400 bg-gray-100 border-solid border-2 w-full text-sm",
+                      attrs: { type: "text", placeholder: "Enter email" },
+                      domProps: { value: _vm.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.email = $event.target.value
                         }
                       }
                     })
@@ -34837,7 +34841,7 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "text-3xl text-blue-700 font-bold mb-10" },
-      [_c("span", [_vm._v("Laravello")])]
+      [_c("span", [_vm._v("Speedy")])]
     )
   },
   function() {

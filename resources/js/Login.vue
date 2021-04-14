@@ -2,13 +2,13 @@
   <div class="bg-white sm:bg-gray-100 h-full flex justify-center">
     <div class="container mt-2 sm:mt-10 flex flex-col items-center">
       <div class="text-3xl text-blue-700 font-bold mb-10">
-        <span>Laravello</span>
+        <span>Speedy</span>
       </div>
 
       <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
         <Errors :errors="errors"></Errors>
 
-        <div class="w-full text-center text-gray-600 font-bold mb-8">Log in to Laravello</div>
+        <div class="w-full text-center text-gray-600 font-bold mb-8">Log in to Speedy</div>
 
         <form @submit.prevent="authenticate">
           <div class="w-full mb-4">
