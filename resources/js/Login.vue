@@ -6,7 +6,12 @@
       </div>
 
       <div class="w-full sm:shadow-xl sm:bg-white sm:py-8 sm:px-12">
-        <Errors :errors="errors"></Errors>
+        <!-- <Errors :errors="errors"></Errors> -->
+        <div v-if="errors.length"
+              class="p-2 bg-red-600 text-gray-100 rounded-sm mb-6 text-sm text-center"
+        >
+          <div v-for="(error, index) in errors" :key="index"> {{error.message}} </div>      
+        </div>
 
         <div class="w-full text-center text-gray-600 font-bold mb-8">Log in to Speedy</div>
 
@@ -50,43 +55,39 @@
   </div>
 </template>
 
-
-// import Login from "./graphql/Login.gql";
-// import { gqlErrors } from "./utils";
+<script>
+import Login from "./graphql/Login.gql";
+import { gqlErrors } from "./utils";
 // import Errors from "./components/Errors";
-// export default {
-//   components: { Errors },
-//   data() {
-//     return {
-//       email: null,
-//       password: null,
-//       errors: []
-//     };
-//   },
-//   methods: {
-//     async authenticate() {
-//       this.errors = [];
-//       try {
-//         const response = await this.$apollo.mutate({
-//           mutation: Login,
-//           variables: {
-//             email: this.email,
-//             password: this.password
-//           }
-//         });
-//         const user = response.data?.login;
-//         if (user) {
-//           this.$store.dispatch("setLoggedIn", true);
-//           this.$store.commit("setUser", user);
-//           this.$router.push({ name: "board" });
-//         }
-//       } catch (err) {
-//         this.errors = gqlErrors(err);
-//       }
-//     }
-//   }
-// };
-// </script>
+export default {
+  // components: { Errors },
+  data() {
+    return {
+      email: null,
+      password: null,
+      errors: []
+    };
+  },
+  methods: {
+    async authenticate(){
+      this.errors = []
+      try{
+        await this.$apollo.mutate({
+          mutation: Login,
+            variables: {
+              email: this.email,
+              password: this.password
+            }
+        });
+      } catch (err){
+        console
+       this.errors = gqlErrors(err);
+      }
+    }
+ 
+  }
+};
+</script>
 
 
 <style scoped>
