@@ -7795,7 +7795,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
-                _this.$store.commit("setLoggedIn", true);
+                _this.$store.dispatch("setLoggedIn", true);
 
                 _this.$router.push({
                   name: "board"
@@ -7943,24 +7943,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 4:
+                _this.$store.dispatch("setLoggedIn", true);
+
                 _this.$router.push({
                   name: "board"
                 });
 
-                _context.next = 10;
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
                 _this.errors = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.gqlErrors)(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 7]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     }
   }
@@ -8334,7 +8336,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
   el: "#app",
   apolloProvider: _apollo_config__WEBPACK_IMPORTED_MODULE_2__.default,
   router: _router_config__WEBPACK_IMPORTED_MODULE_3__.default,
-  store: _vuex_config__WEBPACK_IMPORTED_MODULE_4__.default
+  store: _vuex_config__WEBPACK_IMPORTED_MODULE_4__.default,
+  beforeCreate: function beforeCreate() {
+    _vuex_config__WEBPACK_IMPORTED_MODULE_4__.default.dispatch('setLoggedIn', localStorage.getItem('isLoggedIn') === 'true');
+  }
 });
 
 /***/ }),
@@ -8495,7 +8500,14 @@ var store = {
       state.isLoggedIn = Boolean(payload);
     }
   },
-  actions: {}
+  actions: {
+    setLoggedIn: function setLoggedIn(_ref, payload) {
+      var commit = _ref.commit;
+      var isLoggedIn = Boolean(payload);
+      localStorage.setItem("isLoggedIn", isLoggedIn);
+      commit("setLoggedIn", isLoggedIn);
+    }
+  }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store(store));
 
