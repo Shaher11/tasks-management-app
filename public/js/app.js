@@ -7586,6 +7586,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./resources/js/constants.js");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -7622,6 +7623,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -7629,11 +7632,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     appList: _components_List__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  computed: {
-    isLoggedIn: function isLoggedIn() {
-      return this.$store.state.isLoggedIn;
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    isLoggedIn: "isLoggedIn",
+    name: function name(state) {
+      return state.user.name;
     }
-  },
+  }),
   apollo: {
     board: {
       query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_2___default()),
@@ -36224,7 +36228,11 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
             _vm.isLoggedIn
-              ? _c("div", [
+              ? _c("div", { staticClass: "flex items-center" }, [
+                  _c("div", { staticClass: "text-sm mr-2" }, [
+                    _vm._v(_vm._s(_vm.name))
+                  ]),
+                  _vm._v(" "),
                   _c("button", { staticClass: "header-btn" }, [
                     _vm._v("Logout")
                   ])
