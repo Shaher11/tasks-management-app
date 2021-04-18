@@ -21,7 +21,7 @@
         ></app-card-add-editor>
 
         <app-add-card-bottom
-            v-else
+            v-if="!editing && canAddCard"
             @click="editing = true"
         ></app-add-card-bottom>
         
@@ -31,7 +31,10 @@
 <script>
 import Card from "./Card";
 import AddCardBottom from "./AddCardBottom";
-import CardAddEditor from "./CardAddEditor"
+import CardAddEditor from "./CardAddEditor";
+import { mapState } from "vuex"
+
+
 export default {
     components: {
         appCard: Card,
@@ -46,8 +49,14 @@ export default {
         return {
             editing: false
         };
-    }
+    },
+    computed: mapState({
+        canAddCard (state) {
+            return this.list.board.owner.id == state.user.id;
+        }
+    })
 };
+
 </script>
 
 <style scoped>

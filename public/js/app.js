@@ -7588,15 +7588,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./resources/js/constants.js");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./graphql/Logout.gql */ "./resources/js/graphql/Logout.gql");
 /* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils */ "./resources/js/utils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -7634,6 +7641,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 
 
 
@@ -7643,17 +7651,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     appList: _components_List__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)({
+  computed: _objectSpread({
+    bgColor: function bgColor() {
+      var _this$board;
+
+      return _defineProperty({
+        "bg-gray-500": this.$apollo.loading
+      }, _utils__WEBPACK_IMPORTED_MODULE_5__.colorMap500[(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapState)({
     isLoggedIn: "isLoggedIn",
     name: function name(state) {
       return state.user.name;
     }
-  }),
+  })),
   apollo: {
     board: {
       query: (_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default()),
-      variables: {
-        id: 1
+      variables: function variables() {
+        // we use the method because we retrice dynamic data
+        return {
+          id: Number(this.$route.params.id)
+        };
       }
     }
   },
@@ -8210,10 +8229,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_CardAdd_gql__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
 /* harmony import */ var _CardEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CardEditor */ "./resources/js/components/CardEditor.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
 //
+
 
 
 
@@ -8229,9 +8250,14 @@ __webpack_require__.r(__webpack_exports__);
       title: null
     };
   },
-  mounted: function mounted() {
-    this.$refs.card.focus();
-  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    userId: function userId(state) {
+      return state.user.id;
+    }
+  }),
+  // mounted(){
+  //     this.$refs.card.focus();
+  // },
   methods: {
     addCard: function addCard() {
       var self = this;
@@ -8240,7 +8266,8 @@ __webpack_require__.r(__webpack_exports__);
         variables: {
           title: this.title,
           listId: this.list.id,
-          order: this.list.cards.length + 1
+          order: this.list.cards.length + 1,
+          ownerId: this.userId
         },
         update: function update(store, _ref) {
           var cardAdd = _ref.data.cardAdd;
@@ -8357,6 +8384,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Card */ "./resources/js/components/Card.vue");
 /* harmony import */ var _AddCardBottom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddCardBottom */ "./resources/js/components/AddCardBottom.vue");
 /* harmony import */ var _CardAddEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CardAddEditor */ "./resources/js/components/CardAddEditor.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -8387,6 +8415,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -8403,7 +8432,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editing: false
     };
-  }
+  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+    canAddCard: function canAddCard(state) {
+      return this.list.board.owner.id == state.user.id;
+    }
+  })
 });
 
 /***/ }),
@@ -8545,7 +8579,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_4__.default);
 var routes = [{
-  path: "/",
+  path: "/board/:id",
   name: "board",
   component: _Board_vue__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
@@ -8574,7 +8608,8 @@ var routes = [{
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "gqlErrors": () => (/* binding */ gqlErrors),
-/* harmony export */   "AuthError": () => (/* binding */ AuthError)
+/* harmony export */   "AuthError": () => (/* binding */ AuthError),
+/* harmony export */   "colorMap500": () => (/* binding */ colorMap500)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -8658,6 +8693,17 @@ var AuthError = /*#__PURE__*/function (_Error) {
 
   return AuthError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));
+var colorMap500 = {
+  teal: "bg-teal-500",
+  orange: "bg-orange-500",
+  gray: "bg-gray-500",
+  yellow: "bg-yellow-500",
+  purple: "bg-purple-500",
+  red: "bg-red-500",
+  green: "bg-green-500",
+  blue: "bg-blue-500",
+  indigo: "bg-indigo-500"
+};
 
 /***/ }),
 
@@ -8795,7 +8841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\r\n    height: 40px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\r\n    height: 40px;\r\n    background-color: rgba(0,0,0,0.2);\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9027,8 +9073,8 @@ module.exports = function (data, opts) {
 /***/ ((module) => {
 
 
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BoardWithListsAndCards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}}]}}]}}],"loc":{"start":0,"end":371}};
-    doc.loc.source = {"body":"query BoardWithListsAndCards($id: ID!) {\r\n    board(id: $id) {\r\n        id\r\n        title\r\n        color\r\n        lists {\r\n            id\r\n            title\r\n            board_id\r\n            cards {\r\n                id\r\n                title\r\n                order\r\n                owner {\r\n                    id\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BoardWithListsAndCards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"lists"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"board"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"cards"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}}]}}]}}],"loc":{"start":0,"end":475}};
+    doc.loc.source = {"body":"query BoardWithListsAndCards($id: ID!) {\r\n    board(id: $id) {\r\n        id\r\n        title\r\n        color\r\n        lists {\r\n            id\r\n            title\r\n            board_id\r\n            board {\r\n                owner {\r\n                    id\r\n                }\r\n            }\r\n            cards {\r\n                id\r\n                title\r\n                order\r\n                owner {\r\n                    id\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
   
 
     var names = {};
@@ -9159,8 +9205,8 @@ module.exports = function (data, opts) {
 /***/ ((module) => {
 
 
-    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CardAdd"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"listId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cardAdd"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"list_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"listId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"owner_id"},"value":{"kind":"IntValue","value":"1"}}]}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":211}};
-    doc.loc.source = {"body":"mutation CardAdd($listId: ID!, $title: String!, $order: Int!) {\r\n  cardAdd (\r\n      input: {title: $title, list_id: $listId, order: $order, owner_id:1}\r\n    ){\r\n        id\r\n        title\r\n        order\r\n    }\r\n}","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CardAdd"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"listId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"order"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ownerId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cardAdd"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"list_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"listId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"order"},"value":{"kind":"Variable","name":{"kind":"Name","value":"order"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"owner_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ownerId"}}}]}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"order"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"owner"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]}]}}]}}]}}],"loc":{"start":0,"end":342}};
+    doc.loc.source = {"body":"mutation CardAdd($listId: ID!, $title: String!, $order: Int!, $ownerId: ID!) {\r\n    cardAdd(\r\n        input: {\r\n            title: $title\r\n            list_id: $listId\r\n            order: $order\r\n            owner_id: $ownerId\r\n        }\r\n    ) {\r\n        id\r\n        title\r\n        order\r\n        owner {\r\n          id\r\n        }\r\n    }\r\n}\r\n","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
   
 
     var names = {};
@@ -36538,13 +36584,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "h-full flex flex-col items-stretch bg-blue-500" },
+    { staticClass: "h-full flex flex-col items-stretch ", class: _vm.bgColor },
     [
       _c(
         "div",
         {
           staticClass:
-            "header text-white flex justify-between items-center mb-2 bg-blue-600"
+            "header text-white flex justify-between items-center mb-2"
         },
         [
           _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("R")]),
@@ -37338,13 +37384,17 @@ var render = function() {
               }
             }
           })
-        : _c("app-add-card-bottom", {
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.editing && _vm.canAddCard
+        ? _c("app-add-card-bottom", {
             on: {
               click: function($event) {
                 _vm.editing = true
               }
             }
           })
+        : _vm._e()
     ],
     2
   )
