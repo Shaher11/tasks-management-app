@@ -65,7 +65,7 @@ class CardPolicy
      */
     public function delete(User $user, Card $card)
     {
-        //
+        return $user->id === $card->owner_id;
     }
 
     /**
