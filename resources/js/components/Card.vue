@@ -4,8 +4,10 @@
             class="group flex justify-between shadow-card bg-white rounded-sm p-2 cursor-pointer text-sm hover:bg-gray-100 mb-2">
             
             <div>{{card.title}}</div>
-            <div class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500">
-                <div class="text-gray-400 pr-2 hover:text-yellow-500" @click="editing = true">E</div>
+            <div 
+                v-if="card.owner.id == userId" 
+                class="flex font-bold opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-500">
+                <div class="text-gray-400 pr-2 hover:text-yellow-500" @click="editing = true" >E</div>
                 <div class="text-gray-400 hover:text-red-500" @click="cardDelete">D</div>
             </div>
         </div>
@@ -16,9 +18,10 @@
 
 <script>
 import CardDelete from "./../graphql/CardDelete.gql";
-import CardUpate from "./../graphql/CardUpdate.gql"
+import CardUpate from "./../graphql/CardUpdate.gql";
 import { EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from "./../constants";
-import CardEditor from "./CardEditor"
+import CardEditor from "./CardEditor";
+import { mapState } from "vuex"
 
 export default {
          components: {
@@ -35,6 +38,9 @@ export default {
                 title: this.card.title    
             }
         },
+        computed: mapState({
+            userId: state => state.user.id
+        }),
 
         methods: {
             cardDelete () {
