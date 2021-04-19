@@ -5,10 +5,7 @@
                 <button class="header-btn" @click="showBoards = !showBoards">
                     Boards
                 </button>
-                <div
-                    v-if="showBoards"
-                    class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
-                >
+                <app-dropdown-menu :show="showBoards">
                     <div class="text-gray-600 text-xs font-semibold mb-2 ml-2">
                         BOARDS
                     </div>
@@ -23,7 +20,8 @@
                         ></div>
                         <div class="p-2">The board name!</div>
                     </div>
-                </div>
+
+                </app-dropdown-menu>
             </div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
                 Laravello
@@ -78,10 +76,12 @@ import BoardQuery from "./graphql/BoardWithListsAndCards.gql";
 import { mapState } from "vuex";
 import Logout from "./graphql/Logout.gql";
 import { colorMap500 } from "./utils";
+import DropdownMenu from "./components/DropdownMenu"
 
 export default {
     components: {
-        appList: List
+        appList: List,
+        appDropdownMenu: DropdownMenu
     },
     data() {
         return {
