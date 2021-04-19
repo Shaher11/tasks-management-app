@@ -7641,6 +7641,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7650,6 +7682,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     appList: _components_List__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      showBoards: false
+    };
   },
   computed: _objectSpread({
     bgColor: function bgColor() {
@@ -8841,7 +8878,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\r\n    height: 40px;\r\n    background-color: rgba(0,0,0,0.2);\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-36375f90] {\r\n    height: 40px;\r\n    background-color: rgba(0, 0, 0, 0.2);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36593,14 +36630,69 @@ var render = function() {
             "header text-white flex justify-between items-center mb-2"
         },
         [
-          _c("div", { staticClass: "ml-2 w-1/3" }, [_vm._v("R")]),
+          _c("div", { staticClass: "ml-2 w-1/3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "header-btn",
+                on: {
+                  click: function($event) {
+                    _vm.showBoards = !_vm.showBoards
+                  }
+                }
+              },
+              [_vm._v("\n                Boards\n            ")]
+            ),
+            _vm._v(" "),
+            _vm.showBoards
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "text-gray-600 text-xs font-semibold mb-2 ml-2"
+                      },
+                      [_vm._v("\n                    BOARDS\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(8, function(n) {
+                      return _c(
+                        "div",
+                        {
+                          key: n,
+                          staticClass:
+                            "m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                        },
+                        [
+                          _c("div", {
+                            staticClass:
+                              "bg-green-200 w-10 rounded-sm rounded-r-none"
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "p-2" }, [
+                            _vm._v("The board name!")
+                          ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              : _vm._e()
+          ]),
           _vm._v(" "),
           _c(
             "div",
             {
               staticClass: "text-lg opacity-50 cursor-pointer hover:opacity-75"
             },
-            [_vm._v("Laravello")]
+            [_vm._v("\n            Laravello\n        ")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
@@ -36627,7 +36719,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Sign in")]
+                    [_vm._v("\n                    Sign in\n                ")]
                   ),
                   _vm._v(" "),
                   _c("button", { staticClass: "header-btn" }, [

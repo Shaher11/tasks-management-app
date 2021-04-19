@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   variants: {
-    opacity: ['group-hover'],
+    opacity: ['group-hover', 'hover'],
     extend: {},
   },
   plugins: [],

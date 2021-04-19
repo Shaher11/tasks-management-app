@@ -1,15 +1,45 @@
 <template>
     <div class="h-full flex flex-col items-stretch " :class="bgColor">
         <div class="header text-white flex justify-between items-center mb-2">
-            <div class="ml-2 w-1/3">R</div>
-            <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
+            <div class="ml-2 w-1/3">
+                <button class="header-btn" @click="showBoards = !showBoards">
+                    Boards
+                </button>
+                <div
+                    v-if="showBoards"
+                    class="absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
+                >
+                    <div class="text-gray-600 text-xs font-semibold mb-2 ml-2">
+                        BOARDS
+                    </div>
+
+                    <div
+                        v-for="n in 8"
+                        :key="n"
+                        class="m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                    >
+                        <div
+                            class="bg-green-200 w-10 rounded-sm rounded-r-none"
+                        ></div>
+                        <div class="p-2">The board name!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
+                Laravello
+            </div>
             <div class="mr-2 w-1/3 flex justify-end">
                 <div v-if="isLoggedIn" class="flex items-center">
                     <div class="text-sm mr-2">{{ name }}</div>
                     <button class="header-btn" @click="logout">Logout</button>
                 </div>
                 <div v-else>
-                    <button class="header-btn" @click="$router.push({ name: 'login' })">Sign in</button>
+                    <button
+                        class="header-btn"
+                        @click="$router.push({ name: 'login' })"
+                    >
+                        Sign in
+                    </button>
                     <button class="header-btn">Register</button>
                 </div>
             </div>
@@ -20,84 +50,96 @@
                 <span v-if="$apollo.queries.board.loading"> Loading...</span>
                 <span v-else>{{ board.title }}</span>
             </div>
-            <div class="flex flex-1 items-start overflow-x-auto mx-2" v-if="board">
-                <app-list 
-                    :list="list" 
-                    v-for="list in board.lists" 
+            <div
+                class="flex flex-1 items-start overflow-x-auto mx-2"
+                v-if="board"
+            >
+                <app-list
+                    :list="list"
+                    v-for="list in board.lists"
                     :key="list.id"
                     @card-added="updateQueryCache($event)"
                     @card-deleted="updateQueryCache($event)"
                     @card-updated="updateQueryCache($event)"
-                    ></app-list>
-
+                ></app-list>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-
-import List from './components/List';
-import { EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED } from './constants';
-import BoardQuery from './graphql/BoardWithListsAndCards.gql';
+import List from "./components/List";
+import {
+    EVENT_CARD_ADDED,
+    EVENT_CARD_DELETED,
+    EVENT_CARD_UPDATED
+} from "./constants";
+import BoardQuery from "./graphql/BoardWithListsAndCards.gql";
 import { mapState } from "vuex";
-import Logout from "./graphql/Logout.gql"
-import { colorMap500 } from './utils';
+import Logout from "./graphql/Logout.gql";
+import { colorMap500 } from "./utils";
 
 export default {
     components: {
-        appList: List,
+        appList: List
+    },
+    data() {
+        return {
+            showBoards: false
+        };
     },
     computed: {
         bgColor() {
             return {
                 "bg-gray-500": this.$apollo.loading,
                 [colorMap500[this.board?.color]]: true
-            }
+            };
         },
         ...mapState({
             isLoggedIn: "isLoggedIn",
             name: state => state.user.name
         })
     },
-    apollo:{
+    apollo: {
         board: {
             query: BoardQuery,
-            variables(){  // we use the method because we retrice dynamic data
+            variables() {
+                // we use the method because we retrice dynamic data
                 return {
                     id: Number(this.$route.params.id)
-                }
+                };
             }
         }
     },
-    methods:{
-        async logout(){
+    methods: {
+        async logout() {
             const response = await this.$apollo.mutate({
                 mutation: Logout
             });
 
-            if(response.data?.logout?.id){
+            if (response.data?.logout?.id) {
                 this.$store.dispatch("logout");
             }
         },
 
-        updateQueryCache(event){
+        updateQueryCache(event) {
             const data = event.store.readQuery({
-                    query: BoardQuery,
-                    variables: {id: Number(this.board.id)}
-                });
+                query: BoardQuery,
+                variables: { id: Number(this.board.id) }
+            });
 
-            const listById = () =>   
-                data.board.lists.find(list => (list.id == event.listId));
+            const listById = () =>
+                data.board.lists.find(list => list.id == event.listId);
 
             switch (event.type) {
                 case EVENT_CARD_ADDED:
                     listById().cards.push(event.data);
                     break;
-                
-                case EVENT_CARD_UPDATED:    
-                    listById().cards.filter(card => card.id == event.data.id)
-                    .title = event.data.title;
+
+                case EVENT_CARD_UPDATED:
+                    listById().cards.filter(
+                        card => card.id == event.data.id
+                    ).title = event.data.title;
                     break;
 
                 case EVENT_CARD_DELETED:
@@ -107,20 +149,15 @@ export default {
                     break;
             }
 
-            event.store.writeQuery({ query: BoardQuery, data});
+            event.store.writeQuery({ query: BoardQuery, data });
         }
     }
 };
-
 </script>
 
-
 <style scoped>
-
 .header {
     height: 40px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
-
-
 </style>
