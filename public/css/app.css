@@ -31760,6 +31760,15 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+.appear-enter-active, .appear-leave-active {
+  transition: all 250ms ease-in;
+}
+
+.appear-enter, .appear-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -185939,4 +185948,3 @@ video {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-

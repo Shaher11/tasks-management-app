@@ -23,9 +23,11 @@
 
                 </app-dropdown-menu>
             </div>
-            <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
-                Laravello
-            </div>
+            <transition enter-active-class="animate__rubberBand">
+                <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
+                    Laravello
+                </div>
+            </transition>
             <div class="mr-2 w-1/3 flex justify-end">
                 <div v-if="isLoggedIn" class="flex items-center">
                     <div class="text-sm mr-2">{{ name }}</div>

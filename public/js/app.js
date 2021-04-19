@@ -7672,6 +7672,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -8389,6 +8391,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -36832,11 +36838,18 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass: "text-lg opacity-50 cursor-pointer hover:opacity-75"
-            },
-            [_vm._v("\n            Laravello\n        ")]
+            "transition",
+            { attrs: { "enter-active-class": "animate__rubberBand" } },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "text-lg opacity-50 cursor-pointer hover:opacity-75"
+                },
+                [_vm._v("\n                Laravello\n            ")]
+              )
+            ]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "mr-2 w-1/3 flex justify-end" }, [
@@ -36871,7 +36884,8 @@ var render = function() {
                   ])
                 ])
           ])
-        ]
+        ],
+        1
       ),
       _vm._v(" "),
       _c("div", { staticClass: "h-full flex flex-1 flex-col items-stretch" }, [
@@ -37535,17 +37549,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.show
-    ? _c(
-        "div",
-        {
-          staticClass:
-            "dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
-        },
-        [_vm._t("default")],
-        2
-      )
-    : _vm._e()
+  return _c(
+    "transition",
+    {
+      attrs: {
+        "enter-active-class": "animate__animated animate__bounceIn",
+        "leave-active-class": "animate__animated animate__bounceOut"
+      }
+    },
+    [
+      _vm.show
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "dropdown-menu absolute bg-gray-200 rounded-sm mt-2 text-sm text-gray-600 border-gray-200 shadow w-64 overflow-y-auto z-10 p-2"
+            },
+            [_vm._t("default")],
+            2
+          )
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
