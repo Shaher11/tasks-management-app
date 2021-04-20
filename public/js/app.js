@@ -7588,11 +7588,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./resources/js/constants.js");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./graphql/BoardWithListsAndCards.gql */ "./resources/js/graphql/BoardWithListsAndCards.gql");
 /* harmony import */ var _graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_graphql_BoardWithListsAndCards_gql__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/UserBoardsDropdown */ "./resources/js/components/UserBoardsDropdown.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./graphql/Logout.gql */ "./resources/js/graphql/Logout.gql");
-/* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils */ "./resources/js/utils.js");
-/* harmony import */ var _components_DropdownMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/DropdownMenu */ "./resources/js/components/DropdownMenu.vue");
+/* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graphql/Logout.gql */ "./resources/js/graphql/Logout.gql");
+/* harmony import */ var _graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils */ "./resources/js/utils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7655,25 +7655,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7684,12 +7665,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     appList: _components_List__WEBPACK_IMPORTED_MODULE_1__.default,
-    appDropdownMenu: _components_DropdownMenu__WEBPACK_IMPORTED_MODULE_6__.default
-  },
-  data: function data() {
-    return {
-      showBoards: false
-    };
+    appUserBoardDropdown: _components_UserBoardsDropdown__WEBPACK_IMPORTED_MODULE_4__.default
   },
   computed: _objectSpread({
     bgColor: function bgColor() {
@@ -7697,7 +7673,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return _defineProperty({
         "bg-gray-500": this.$apollo.loading
-      }, _utils__WEBPACK_IMPORTED_MODULE_5__.colorMap500[(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
+      }, _utils__WEBPACK_IMPORTED_MODULE_6__.colorMap500[(_this$board = this.board) === null || _this$board === void 0 ? void 0 : _this$board.color], true);
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapState)({
     isLoggedIn: "isLoggedIn",
@@ -7730,7 +7706,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context.next = 2;
                 return _this.$apollo.mutate({
-                  mutation: (_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_4___default())
+                  mutation: (_graphql_Logout_gql__WEBPACK_IMPORTED_MODULE_5___default())
                 });
 
               case 2:
@@ -8508,6 +8484,80 @@ __webpack_require__.r(__webpack_exports__);
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
     canAddCard: function canAddCard(state) {
       return this.list.board.owner.id == state.user.id;
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../graphql/UserBoards.gql */ "./resources/js/graphql/UserBoards.gql");
+/* harmony import */ var _graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownMenu */ "./resources/js/components/DropdownMenu.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    appDropdownMenu: _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  apollo: {
+    UserBoards: {
+      query: (_graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0___default()),
+      variables: function variables() {
+        return {
+          userId: 1
+        };
+      },
+      skip: function skip() {
+        return !this.userId;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      showBoards: false
+    };
+  },
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+    userId: function userId(state) {
+      return state.user.id;
     }
   })
 });
@@ -10211,6 +10261,138 @@ module.exports = function (data, opts) {
     module.exports = doc;
     
         module.exports.Register = oneQuery(doc, "Register");
+        
+
+
+/***/ }),
+
+/***/ "./resources/js/graphql/UserBoards.gql":
+/*!*********************************************!*\
+  !*** ./resources/js/graphql/UserBoards.gql ***!
+  \*********************************************/
+/***/ ((module) => {
+
+
+    var doc = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UserBoards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userBoards"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"owner_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"title"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"color"},"arguments":[],"directives":[]}]}}]}}],"loc":{"start":0,"end":120}};
+    doc.loc.source = {"body":"query UserBoards($userId: ID!) {\r\n    userBoards(owner_id: $userId){\r\n        id\r\n        title\r\n        color\r\n    }\r\n}","name":"GraphQL request","locationOffset":{"line":1,"column":1}};
+  
+
+    var names = {};
+    function unique(defs) {
+      return defs.filter(
+        function(def) {
+          if (def.kind !== 'FragmentDefinition') return true;
+          var name = def.name.value
+          if (names[name]) {
+            return false;
+          } else {
+            names[name] = true;
+            return true;
+          }
+        }
+      )
+    }
+  
+
+    // Collect any fragment/type references from a node, adding them to the refs Set
+    function collectFragmentReferences(node, refs) {
+      if (node.kind === "FragmentSpread") {
+        refs.add(node.name.value);
+      } else if (node.kind === "VariableDefinition") {
+        var type = node.type;
+        if (type.kind === "NamedType") {
+          refs.add(type.name.value);
+        }
+      }
+
+      if (node.selectionSet) {
+        node.selectionSet.selections.forEach(function(selection) {
+          collectFragmentReferences(selection, refs);
+        });
+      }
+
+      if (node.variableDefinitions) {
+        node.variableDefinitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+
+      if (node.definitions) {
+        node.definitions.forEach(function(def) {
+          collectFragmentReferences(def, refs);
+        });
+      }
+    }
+
+    var definitionRefs = {};
+    (function extractReferences() {
+      doc.definitions.forEach(function(def) {
+        if (def.name) {
+          var refs = new Set();
+          collectFragmentReferences(def, refs);
+          definitionRefs[def.name.value] = refs;
+        }
+      });
+    })();
+
+    function findOperation(doc, name) {
+      for (var i = 0; i < doc.definitions.length; i++) {
+        var element = doc.definitions[i];
+        if (element.name && element.name.value == name) {
+          return element;
+        }
+      }
+    }
+
+    function oneQuery(doc, operationName) {
+      // Copy the DocumentNode, but clear out the definitions
+      var newDoc = {
+        kind: doc.kind,
+        definitions: [findOperation(doc, operationName)]
+      };
+      if (doc.hasOwnProperty("loc")) {
+        newDoc.loc = doc.loc;
+      }
+
+      // Now, for the operation we're running, find any fragments referenced by
+      // it or the fragments it references
+      var opRefs = definitionRefs[operationName] || new Set();
+      var allRefs = new Set();
+      var newRefs = new Set();
+
+      // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+      opRefs.forEach(function(refName) {
+        newRefs.add(refName);
+      });
+
+      while (newRefs.size > 0) {
+        var prevRefs = newRefs;
+        newRefs = new Set();
+
+        prevRefs.forEach(function(refName) {
+          if (!allRefs.has(refName)) {
+            allRefs.add(refName);
+            var childRefs = definitionRefs[refName] || new Set();
+            childRefs.forEach(function(childRef) {
+              newRefs.add(childRef);
+            });
+          }
+        });
+      }
+
+      allRefs.forEach(function(refName) {
+        var op = findOperation(doc, refName);
+        if (op) {
+          newDoc.definitions.push(op);
+        }
+      });
+
+      return newDoc;
+    }
+
+    module.exports = doc;
+    
+        module.exports.UserBoards = oneQuery(doc, "UserBoards");
         
 
 
@@ -36354,6 +36536,45 @@ component.options.__file = "resources/js/components/List.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/UserBoardsDropdown.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/UserBoardsDropdown.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserBoardsDropdown.vue?vue&type=template&id=b3734158& */ "./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158&");
+/* harmony import */ var _UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserBoardsDropdown.vue?vue&type=script&lang=js& */ "./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/UserBoardsDropdown.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Board.vue?vue&type=script&lang=js&":
 /*!*********************************************************!*\
   !*** ./resources/js/Board.vue?vue&type=script&lang=js& ***!
@@ -36495,6 +36716,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./List.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/List.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserBoardsDropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -36668,6 +36905,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserBoardsDropdown_vue_vue_type_template_id_b3734158___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserBoardsDropdown.vue?vue&type=template&id=b3734158& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Board.vue?vue&type=style&index=0&id=36375f90&scoped=true&lang=css&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/Board.vue?vue&type=style&index=0&id=36375f90&scoped=true&lang=css& ***!
@@ -36783,57 +37037,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "ml-2 w-1/3" },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "header-btn",
-                  on: {
-                    click: function($event) {
-                      _vm.showBoards = !_vm.showBoards
-                    }
-                  }
-                },
-                [_vm._v("\n                Boards\n            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "app-dropdown-menu",
-                { attrs: { show: _vm.showBoards } },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "text-gray-600 text-xs font-semibold mb-2 ml-2"
-                    },
-                    [_vm._v("\n                    BOARDS\n                ")]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(8, function(n) {
-                    return _c(
-                      "div",
-                      {
-                        key: n,
-                        staticClass:
-                          "m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
-                      },
-                      [
-                        _c("div", {
-                          staticClass:
-                            "bg-green-200 w-10 rounded-sm rounded-r-none"
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "p-2" }, [
-                          _vm._v("The board name!")
-                        ])
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ],
+            [_c("app-user-board-dropdown")],
             1
           ),
           _vm._v(" "),
@@ -37693,6 +37897,79 @@ var render = function() {
         : _vm._e()
     ],
     2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/UserBoardsDropdown.vue?vue&type=template&id=b3734158& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "button",
+        {
+          staticClass: "header-btn",
+          on: {
+            click: function($event) {
+              _vm.showBoards = !_vm.showBoards
+            }
+          }
+        },
+        [_vm._v("\n        Boards\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "app-dropdown-menu",
+        { attrs: { show: _vm.showBoards } },
+        [
+          _c(
+            "div",
+            { staticClass: "text-gray-600 text-xs font-semibold mb-2 ml-2" },
+            [_vm._v("\n            BOARDS\n        ")]
+          ),
+          _vm._v(" "),
+          _vm._l(8, function(n) {
+            return _c(
+              "div",
+              {
+                key: n,
+                staticClass:
+                  "m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+              },
+              [
+                _c("div", {
+                  staticClass: "bg-green-200 w-10 rounded-sm rounded-r-none"
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-2" }, [_vm._v("The board name!")])
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
