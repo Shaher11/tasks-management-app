@@ -10,7 +10,7 @@ type Query {
     user(id: ID @eq): User @find
     userBoards(owner_id: ID! @where): [Board!]
         @all
-        @can(ability: "viewOwnedBoards", find: "owner_id", model: "App\\User")
+       @can(ability: "viewOwnedBoards", find: "owner_id", model: "App\\Models\\User")
     board(id: ID! @eq): Board @find
     me: User @auth
 }
@@ -18,7 +18,7 @@ type Query {
 type Mutation {
     cardAdd(input: CardAddInput @spread): Card!
         @create
-        @can(ability: "createCard", model: "App\\CardList", find: "list_id")
+        @can(ability: "createCard", model: "App\\Models\\CardList", find: "list_id")
     cardDelete(id: ID!): Card @delete @can(ability: "delete", find: "id")
     cardUpdate(id: ID!, title: String): Card
         @update

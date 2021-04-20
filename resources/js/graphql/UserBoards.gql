@@ -1,5 +1,5 @@
 query UserBoards($userId: ID!) {
-    userBoards(owner_id: $userId){
+    userBoards(owner_id: $userId) {
         id
         title
         color
