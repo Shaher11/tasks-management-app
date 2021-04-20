@@ -8501,10 +8501,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../graphql/UserBoards.gql */ "./resources/js/graphql/UserBoards.gql");
 /* harmony import */ var _graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownMenu */ "./resources/js/components/DropdownMenu.vue");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../utils */ "./resources/js/utils.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -8530,6 +8537,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 
@@ -8538,7 +8548,7 @@ __webpack_require__.r(__webpack_exports__);
     appDropdownMenu: _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__.default
   },
   apollo: {
-    UserBoards: {
+    userBoards: {
       query: (_graphql_UserBoards_gql__WEBPACK_IMPORTED_MODULE_0___default()),
       variables: function variables() {
         return {
@@ -8555,9 +8565,16 @@ __webpack_require__.r(__webpack_exports__);
       showBoards: false
     };
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
     userId: function userId(state) {
       return state.user.id;
+    }
+  })), {}, {
+    colorMap100: function colorMap100() {
+      return _utils__WEBPACK_IMPORTED_MODULE_2__.colorMap100;
+    },
+    colorMap200: function colorMap200() {
+      return _utils__WEBPACK_IMPORTED_MODULE_2__.colorMap200;
     }
   })
 });
@@ -8731,7 +8748,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "gqlErrors": () => (/* binding */ gqlErrors),
 /* harmony export */   "AuthError": () => (/* binding */ AuthError),
-/* harmony export */   "colorMap500": () => (/* binding */ colorMap500)
+/* harmony export */   "colorMap500": () => (/* binding */ colorMap500),
+/* harmony export */   "colorMap100": () => (/* binding */ colorMap100),
+/* harmony export */   "colorMap200": () => (/* binding */ colorMap200)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -8825,6 +8844,28 @@ var colorMap500 = {
   green: "bg-green-500",
   blue: "bg-blue-500",
   indigo: "bg-indigo-500"
+};
+var colorMap100 = {
+  teal: "bg-teal-100",
+  orange: "bg-orange-100",
+  gray: "bg-gray-100",
+  yellow: "bg-yellow-100",
+  purple: "bg-purple-100",
+  red: "bg-red-100",
+  green: "bg-green-100",
+  blue: "bg-blue-100",
+  indigo: "bg-indigo-100"
+};
+var colorMap200 = {
+  teal: "bg-teal-200",
+  orange: "bg-orange-200",
+  gray: "bg-gray-200",
+  yellow: "bg-yellow-200",
+  purple: "bg-purple-200",
+  red: "bg-red-200",
+  green: "bg-green-200",
+  blue: "bg-blue-200",
+  indigo: "bg-indigo-200"
 };
 
 /***/ }),
@@ -37948,20 +37989,25 @@ var render = function() {
             [_vm._v("\n            BOARDS\n        ")]
           ),
           _vm._v(" "),
-          _vm._l(8, function(n) {
+          _vm._l(_vm.userBoards, function(board) {
             return _c(
-              "div",
+              "router-link",
               {
-                key: n,
+                key: board.id,
                 staticClass:
-                  "m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+                  "m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex",
+                class: ["bg-" + board.color + "-100"],
+                attrs: { to: { name: "board", params: { id: board.id } } }
               },
               [
                 _c("div", {
-                  staticClass: "bg-green-200 w-10 rounded-sm rounded-r-none"
+                  staticClass: "w-10 rounded-sm rounded-r-none",
+                  class: ["bg-" + board.color + "-200"]
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-2" }, [_vm._v("The board name!")])
+                _c("div", { staticClass: "p-2" }, [
+                  _vm._v(_vm._s(board.title) + " ")
+                ])
               ]
             )
           })

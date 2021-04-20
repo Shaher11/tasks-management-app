@@ -8,16 +8,18 @@
                 BOARDS
             </div>
 
-            <div
-                v-for="n in 8"
-                :key="n"
-                class="m-2 bg-green-100 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
+            <router-link :to="{name: 'board', params: {id: board.id}}"
+                v-for="board in userBoards"
+                :key="board.id"
+                :class="[`bg-${board.color}-100`]"
+                class="m-2 rounded-sm opacity-100 hover:opacity-75 text-gray-700 font-bold cursor-pointer flex"
             >
                 <div
-                    class="bg-green-200 w-10 rounded-sm rounded-r-none"
+                    :class="[`bg-${board.color}-200`]"
+                    class="w-10 rounded-sm rounded-r-none"
                 ></div>
-                <div class="p-2">The board name!</div>
-            </div>
+                <div class="p-2">{{ board.title }} </div>
+            </router-link>
 
         </app-dropdown-menu>
     </div>
@@ -27,13 +29,14 @@
 import { mapState } from 'vuex';
 import UserBoards from "./../graphql/UserBoards.gql"
 import DropdownMenu from "./DropdownMenu"
+import { colorMap100,colorMap200 } from "./../utils";
 
     export default {
         components: {
             appDropdownMenu: DropdownMenu
         },
         apollo: {
-            UserBoards: {
+            userBoards: {
                 query: UserBoards,
                 variables(){
                     return {
@@ -51,9 +54,13 @@ import DropdownMenu from "./DropdownMenu"
                 showBoards: false
             };
         },
-        computed: mapState({
+        computed: {
+            ...mapState({
             userId: state => state.user.id
-        })
+            }),
+            colorMap100: () => colorMap100,
+            colorMap200: () => colorMap200
+        }
 
 
 
