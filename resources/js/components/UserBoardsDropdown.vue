@@ -50,7 +50,7 @@ export default {
             query: UserBoards,
             variables() {
                 return {
-                    userId: 1
+                    userId: this.userId
                 };
             },
             skip() {

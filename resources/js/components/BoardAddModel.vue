@@ -1,39 +1,114 @@
 <template>
     <app-model
-        :width="300"
+        :width="400"
         :height="250"
         :show="show"
         @closed="$emit('closed')"
     >
         <div class="flex">
-            <div class="rounded-sm p-4 text-black w-full mr-2 bg-gray-700">
+            <div
+                class="rounded-sm p-4 text-black w-full mr-2"
+                :class="[colors[color]]"
+            >
                 <input
+                    v-model="title"
                     type="text"
                     placeholder="Add board title"
                     class="title rounded-sm text-white outline-none py-1 px-2 font-bold w-full hover:opacity-50 placehoder-gray-100"
                 />
-
             </div>
-         
+
+            <div>
+                <div
+                    class="flex justify-between mb-2"
+                    v-for="(row, i) in colorGrid"
+                    :key="i"
+                >
+                    <app-board-color
+                        v-for="(c, i) in row"
+                        :key="i"
+                        :color="c"
+                        :activeColor="color"
+                        @changed="color = $event"
+                    ></app-board-color>
+                </div>
+            </div>
         </div>
 
         <div class="mt-4">
             <button
-                class="rounded-sm py-2 px-4 text-black cursor-pointer bg-teal-300 hover:bg-teal-500"
-            > Create</button>
+                @click="addBoard"
+                :disabled="cannotCreate"
+                class="rounded-sm py-2 px-4 text-white hover:opacity-75 cursor-pointer disabled:opacity-25"
+                :class="[colors[color]]"
+            >
+                Create
+            </button>
         </div>
     </app-model>
 </template>
 
 <script>
 import Model from "./Model";
+import BoardColor from "./BoardColor";
+import { colorGrid, colorMap500 } from "./../utils";
+
+import BoardAdd from "./../graphql/BoardAdd.gql";
+import UserBoards from "./../graphql/UserBoards.gql";
+import { mapState } from "vuex";
 
 export default {
     props: {
         show: Boolean
     },
+
     components: {
-        appModel: Model
+        appModel: Model,
+        appBoardColor: BoardColor
+    },
+
+    data() {
+        return {
+            color: "orange",
+            title: null
+        };
+    },
+
+    computed: {
+        ...mapState({
+            userId: state => state.user.id
+        }),
+        colors: () => colorMap500,
+        colorGrid: () => colorGrid,
+        cannotCreate() {
+            return this.title == null || this.title.length == 0;
+        }
+    },
+
+    methods: {
+        addBoard() {
+            const self = this;
+            this.$apollo.mutate({
+                mutation: BoardAdd,
+                variables: {
+                    title: this.title,
+                    color: this.color
+                },
+                update(store, { data: { boardAdd } }) {
+                    const data = store.readQuery({
+                        query: UserBoards,
+                        variables: { userId: self.userId }
+                    });
+                    data.userBoards.push(boardAdd);
+                    store.writeQuery({
+                        query: UserBoards,
+                        data,
+                        variables: { userId: self.userId }
+                    });
+                    self.$emit("closed");
+                }
+            });
+        }
     }
 };
 </script>

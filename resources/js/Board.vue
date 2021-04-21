@@ -2,7 +2,9 @@
     <div class="h-full flex flex-col items-stretch " :class="bgColor">
         <div class="header text-white flex justify-between items-center mb-2">
             <div class="ml-2 w-1/3">
-             <app-user-board-dropdown></app-user-board-dropdown>    
+                <app-user-board-dropdown
+                    v-if="isLoggedIn"
+                ></app-user-board-dropdown>
             </div>
             <transition enter-active-class="animate__rubberBand">
                 <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">
@@ -61,12 +63,10 @@ import { mapState } from "vuex";
 import Logout from "./graphql/Logout.gql";
 import { colorMap500 } from "./utils";
 
-
 export default {
     components: {
         appList: List,
         appUserBoardDropdown: UserBoardDropdown
-      
     },
     computed: {
         bgColor() {
@@ -129,7 +129,12 @@ export default {
                     break;
             }
 
-            event.store.writeQuery({ query: BoardQuery, data });
+            event.store.writeQuery({ 
+                query: BoardQuery, 
+                data,
+                variables: { id: Number(this.board.id) } 
+                
+            });
         }
     }
 };
