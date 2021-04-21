@@ -28,14 +28,7 @@
             >
                 Create new board...
             </div>
-            <app-model
-                :width="300"
-                :height="250"
-                :show="showModel"
-                @closed="showModel = false"
-            >
-                Hello from Model ...
-            </app-model>
+            <app-board-add-model :show="showModel" @closed="showModel = false"></app-board-add-model>
         </app-dropdown-menu>
     </div>
 </template>
@@ -45,12 +38,12 @@ import { mapState } from "vuex";
 import UserBoards from "./../graphql/UserBoards.gql";
 import DropdownMenu from "./DropdownMenu";
 import { colorMap100, colorMap200 } from "./../utils";
-import Model from "./Model";
+import BoardAddModel from "./BoardAddModel"
 
 export default {
     components: {
         appDropdownMenu: DropdownMenu,
-        appModel: Model
+        appBoardAddModel: BoardAddModel
     },
     apollo: {
         userBoards: {
