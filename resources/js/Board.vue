@@ -46,7 +46,7 @@
                     @card-updated="updateQueryCache($event)"
                 ></app-list>
 
-                <app-list-add-editor></app-list-add-editor>
+                <app-list-add-editor :board="board.id" @added="updateQueryCache($event)"></app-list-add-editor>
             </div>
         </div>
     </div>
@@ -58,7 +58,8 @@ import ListAddEditor from "./components/ListAddEditor";
 import {
     EVENT_CARD_ADDED,
     EVENT_CARD_DELETED,
-    EVENT_CARD_UPDATED
+    EVENT_CARD_UPDATED,
+    EVENT_LIST_ADDED
 } from "./constants";
 import BoardQuery from "./graphql/BoardWithListsAndCards.gql";
 import UserBoardDropdown from "./components/UserBoardsDropdown";
@@ -116,6 +117,10 @@ export default {
                 data.board.lists.find(list => list.id == event.listId);
 
             switch (event.type) {
+                case EVENT_LIST_ADDED:
+                    data.board.lists.push(event.data);
+                    break;
+
                 case EVENT_CARD_ADDED:
                     listById().cards.push(event.data);
                     break;
