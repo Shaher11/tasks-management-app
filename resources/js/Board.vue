@@ -45,6 +45,8 @@
                     @card-deleted="updateQueryCache($event)"
                     @card-updated="updateQueryCache($event)"
                 ></app-list>
+
+                <app-list-add-editor></app-list-add-editor>
             </div>
         </div>
     </div>
@@ -52,6 +54,7 @@
 
 <script>
 import List from "./components/List";
+import ListAddEditor from "./components/ListAddEditor";
 import {
     EVENT_CARD_ADDED,
     EVENT_CARD_DELETED,
@@ -66,7 +69,8 @@ import { colorMap500 } from "./utils";
 export default {
     components: {
         appList: List,
-        appUserBoardDropdown: UserBoardDropdown
+        appUserBoardDropdown: UserBoardDropdown,
+        appListAddEditor: ListAddEditor
     },
     computed: {
         bgColor() {
